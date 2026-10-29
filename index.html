@@ -1,0 +1,689 @@
+<!DOCTYPE html>
+<html lang="am">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>TILA SAACO Microfinance</title>
+<style>
+:root{
+  --navy:#062b63;
+  --navy-deep:#031a40;
+  --blue:#2898f7;
+  --blue-light:#72beff;
+  --sky:#eaf5ff;
+  --white:#ffffff;
+  --text:#0a2857;
+  --muted:#7387a3;
+  --border:#dce8f5;
+}
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
+html,body{min-height:100%;font-family:Inter,Arial,Helvetica,sans-serif;color:var(--text);background:radial-gradient(circle at 15% 10%, #dff0ff 0, transparent 25%),radial-gradient(circle at 85% 90%, #cde7ff 0, transparent 28%),#edf6ff;}
+body{display:flex;align-items:center;justify-content:center;}
+button,input,select,textarea{font:inherit;}
+button{cursor:pointer;}
+.phone{width:390px;max-width:100%;height:844px;max-height:100vh;position:relative;overflow:hidden;background:#fff;border-radius:34px;box-shadow:0 30px 85px rgba(5,41,91,.24);}
+.screen{display:none;width:100%;height:100%;overflow:auto;background:#fff;scrollbar-width:none;}
+.screen::-webkit-scrollbar{display:none;}
+.screen.active{display:block;}
+.logo{text-align:center;}
+.logo svg{width:145px;height:115px;overflow:visible;}
+.logo-name{margin-top:-4px;font-family:Georgia,"Times New Roman",serif;letter-spacing:6px;font-size:25px;white-space:nowrap;}
+.logo-name .tila{color:var(--navy);}
+.logo-name .saaco{color:var(--blue);}
+.tagline{margin-top:7px;font-size:10px;letter-spacing:2.3px;color:var(--navy);}
+#splash{background:linear-gradient(165deg,#ffffff 0%,#ffffff 49%,#edf7ff 49%,#cce6ff 63%,#2b90ed 64%,#073a82 100%);}
+.splash-inner{height:100%;padding:126px 30px 42px;display:flex;flex-direction:column;align-items:center;}
+.splash-copy{margin-top:auto;align-self:flex-start;color:#fff;font-size:18px;line-height:1.58;letter-spacing:1px;}
+.splash-bottom{width:100%;color:#fff;text-align:center;margin-top:28px;font-size:10px;letter-spacing:2px;}
+.splash-line{width:126px;height:3px;background:#fff;margin:0 auto 12px;border-radius:10px;}
+#login{background:linear-gradient(180deg, #072c66 0%, #0a56ab 42%, #eef7ff 42%, #f7fbff 100%);}
+.login-wrap{min-height:100%;position:relative;overflow:hidden;}
+.login-hero{position:relative;padding:34px 24px 0;height:312px;color:#fff;}
+.login-hero::before{content:"";position:absolute;width:340px;height:340px;right:-120px;top:-130px;border-radius:50%;background:radial-gradient(circle, rgba(255,255,255,.26) 0%, rgba(255,255,255,0) 72%);}
+.login-hero::after{content:"";position:absolute;left:-90px;bottom:-55px;width:250px;height:250px;border-radius:50%;background:radial-gradient(circle, rgba(255,255,255,.12) 0%, rgba(255,255,255,0) 72%);}
+.hero-brand{position:relative;z-index:2;display:flex;align-items:center;justify-content:space-between;}
+.security-chip{padding:8px 12px;border-radius:20px;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.16);backdrop-filter:blur(8px);font-size:10px;letter-spacing:1px;}
+.login-brand-center{position:relative;z-index:2;margin-top:16px;text-align:center;}
+.login-brand-center .logo-name .tila,.login-brand-center .tagline{color:#fff;}
+.login-brand-center .logo-name .saaco{color:#bfe2ff;}
+.hero-copy{position:relative;z-index:2;margin-top:22px;text-align:left;}
+.hero-copy h1{font-size:27px;line-height:1.2;font-weight:800;}
+.hero-copy p{margin-top:10px;font-size:13px;line-height:1.65;color:rgba(255,255,255,.83);}
+.flow-lines{position:absolute;inset:0;pointer-events:none;z-index:1;}
+.flow-lines svg{width:100%;height:100%;opacity:.85;}
+.login-card{position:relative;z-index:5;width:calc(100% - 28px);margin:-28px auto 20px;padding:22px 18px 22px;border-radius:28px;background:rgba(255,255,255,.96);border:1px solid rgba(255,255,255,.8);box-shadow:0 18px 45px rgba(6,43,99,.16);backdrop-filter:blur(12px);}
+.login-card-header{display:flex;align-items:flex-start;justify-content:space-between;gap:10px;margin-bottom:18px;}
+.login-card-header h2{font-size:24px;color:var(--navy-deep);}
+.login-card-header p{margin-top:5px;font-size:12px;color:var(--muted);line-height:1.6;}
+.mini-badge{padding:8px 10px;border-radius:16px;background:#eef6ff;color:var(--navy);font-size:10px;font-weight:800;}
+.field{position:relative;margin-bottom:15px;}
+.field label{display:block;margin:0 0 7px 4px;color:var(--muted);font-size:12px;}
+.field-icon{position:absolute;left:14px;top:39px;width:18px;height:18px;display:grid;place-items:center;color:#6f87a7;font-size:15px;}
+.field input,.field select,.field textarea{width:100%;border:1px solid var(--border);outline:none;padding:15px 16px 15px 42px;border-radius:14px;background:#fbfdff;color:var(--navy-deep);font-size:14px;transition:.2s;}
+.field textarea{resize:none;min-height:100px;padding-left:16px;}
+.field select{padding-left:16px;}
+.field input:focus,.field select:focus,.field textarea:focus{border-color:var(--blue);box-shadow:0 0 0 4px rgba(40,152,247,.09);}
+.btn{width:100%;border:0;border-radius:14px;padding:15px;font-size:14px;font-weight:800;transition:.18s;}
+.btn:active{transform:scale(.985);}
+.btn-primary{color:#fff;background:linear-gradient(135deg,#269cff,#0757bd);box-shadow:0 12px 24px rgba(8,97,202,.20);}
+.btn-light{color:var(--navy);background:#eaf4ff;}
+.auth-tools{display:flex;align-items:center;justify-content:space-between;margin:-1px 4px 18px;gap:10px;}
+.link{color:#0871d8;font-weight:700;cursor:pointer;}
+.small{font-size:12px;color:var(--muted);}
+.center{text-align:center;}
+.switch-auth{text-align:center;margin-top:22px;font-size:13px;}
+.bio-btn{margin-top:12px;display:flex;align-items:center;justify-content:center;gap:9px;padding:13px 14px;border-radius:14px;background:#f4f9ff;border:1px solid #dce9f5;color:var(--navy);font-weight:700;}
+.bio-icon{width:26px;height:26px;border-radius:50%;background:#e3f0ff;display:grid;place-items:center;font-size:16px;}
+.auth-page{min-height:100%;padding:46px 28px 32px;background:radial-gradient(circle at 90% 0%,#e8f5ff 0%,transparent 25%),white;}
+.auth-logo{transform:scale(.72);margin:-28px 0 -8px;}
+.title{text-align:center;font-size:27px;color:var(--navy-deep);font-weight:800;}
+.subtitle{text-align:center;color:var(--muted);margin-top:8px;font-size:14px;line-height:1.5;}
+.form{margin-top:32px;}
+.otp-boxes{display:flex;justify-content:center;gap:8px;margin:34px 0 26px;}
+.otp-boxes input{width:45px;height:52px;border:1px solid var(--border);border-radius:11px;outline:none;text-align:center;font-size:20px;font-weight:800;color:var(--navy);padding:0;}
+.otp-boxes input:focus{border-color:var(--blue);box-shadow:0 0 0 3px rgba(40,152,247,.10);}
+.home{min-height:100%;background:#f5f9ff;padding-bottom:95px;}
+.home-header{min-height:215px;padding:28px 22px 70px;color:#fff;background:radial-gradient(circle at 95% 5%,#1769b8 0%,transparent 35%),linear-gradient(145deg,#063b79,#031d49);border-radius:0 0 38px 38px;}
+.top-row{display:flex;align-items:center;justify-content:space-between;}
+.mini-brand{display:flex;align-items:center;gap:8px;font-family:Georgia,"Times New Roman",serif;letter-spacing:2px;font-size:13px;}
+.mini-brand svg{width:36px;height:32px;}
+.bell{width:38px;height:38px;border:0;color:#fff;background:rgba(255,255,255,.12);border-radius:50%;display:grid;place-items:center;font-size:17px;}
+.greeting{margin-top:28px;}
+.greeting small{opacity:.78;font-size:12px;}
+.greeting h2{margin:5px 0 4px;font-size:26px;}
+.overview{position:relative;z-index:2;margin:-52px 18px 0;padding:20px;border-radius:22px;background:#fff;box-shadow:0 13px 35px rgba(13,67,130,.13);}
+.balance-title{color:var(--muted);font-size:11px;}
+.balance{margin-top:5px;color:var(--navy-deep);font-size:29px;font-weight:850;}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:7px;margin-top:18px;}
+.stat{padding:11px 8px;background:#f2f8ff;border-radius:13px;}
+.stat span{display:block;color:var(--muted);font-size:9px;}
+.stat b{display:block;margin-top:5px;color:var(--navy);font-size:12px;}
+.section{padding:22px 18px 0;}
+.section-head{display:flex;align-items:flex-end;justify-content:space-between;gap:10px;margin-bottom:14px;}
+.section-head h3{font-size:17px;color:var(--navy-deep);}
+.section-head p{margin-top:4px;color:var(--muted);font-size:10px;}
+.actions{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;}
+.action{border:0;background:transparent;color:var(--navy-deep);text-align:center;}
+.action-icon{height:57px;border:1px solid #deecfb;border-radius:17px;background:#eaf4ff;display:grid;place-items:center;font-size:22px;}
+.action p{margin-top:8px;font-size:9.5px;line-height:1.25;}
+.loan-slider-wrap{position:relative;}
+.loan-slider{display:flex;gap:0;overflow-x:auto;scroll-snap-type:x mandatory;scroll-behavior:smooth;padding:2px 0 6px;scrollbar-width:none;}
+.loan-slider::-webkit-scrollbar{display:none;}
+.product-card{flex:0 0 100%;min-width:100%;scroll-snap-align:start;scroll-snap-stop:always;overflow:hidden;position:relative;border-radius:21px;padding:18px;color:#fff;background:radial-gradient(circle at 100% 0%,rgba(255,255,255,.25),transparent 35%),linear-gradient(135deg,#073d7d,#1087e6);box-shadow:0 11px 26px rgba(7,70,145,.15);}
+.product-card:nth-child(3n+2){background:radial-gradient(circle at 100% 0%,rgba(255,255,255,.22),transparent 35%),linear-gradient(135deg,#082d67,#226db4);}
+.product-card:nth-child(3n+3){background:radial-gradient(circle at 100% 0%,rgba(255,255,255,.22),transparent 35%),linear-gradient(135deg,#095487,#28a0df);}
+.product-top{display:flex;align-items:center;justify-content:space-between;}
+.product-icon{width:44px;height:44px;border-radius:14px;display:grid;place-items:center;background:rgba(255,255,255,.16);border:1px solid rgba(255,255,255,.23);font-size:21px;}
+.product-number{font-size:10px;letter-spacing:1px;opacity:.65;}
+.product-card h4{margin-top:17px;font-size:20px;}
+.product-card > p{margin-top:7px;min-height:35px;max-width:90%;font-size:11px;line-height:1.55;color:rgba(255,255,255,.84);}
+.product-actions{display:flex;gap:8px;margin-top:17px;}
+.product-actions button{border:0;padding:10px 13px;border-radius:11px;font-size:10px;font-weight:800;}
+.product-details-btn{color:#fff;border:1px solid rgba(255,255,255,.32)!important;background:rgba(255,255,255,.10);}
+.product-apply-btn{color:var(--navy);background:#fff;}
+.slider-controls{display:flex;justify-content:space-between;align-items:center;margin-top:11px;}
+.slider-dots{display:flex;align-items:center;gap:5px;max-width:220px;overflow:hidden;}
+.slider-dot{width:5px;height:5px;flex:0 0 auto;border-radius:10px;background:#c8d7e8;transition:.2s;}
+.slider-dot.active{width:17px;background:var(--blue);}
+.slider-arrows{display:flex;gap:6px;}
+.slider-arrow{width:32px;height:32px;border:1px solid #dde8f4;border-radius:10px;background:#fff;color:var(--navy);font-size:16px;}
+.loan-card{padding:16px;border-radius:18px;background:#fff;box-shadow:0 8px 23px rgba(18,73,139,.07);}
+.loan-card + .loan-card{margin-top:10px;}
+.loan-card-row{display:flex;align-items:center;justify-content:space-between;gap:10px;}
+.loan-card h4{font-size:14px;}
+.loan-card p{margin-top:5px;color:var(--muted);font-size:10px;}
+.status{display:inline-block;padding:6px 9px;border-radius:20px;background:#e5faef;color:#0b8954;font-size:9px;font-weight:800;}
+.progress-line{height:6px;margin-top:15px;overflow:hidden;border-radius:10px;background:#e8f0f8;}
+.progress-value{width:45%;height:100%;border-radius:10px;background:linear-gradient(90deg,var(--navy),var(--blue));}
+.progress-meta{display:flex;justify-content:space-between;margin-top:7px;color:var(--muted);font-size:9px;}
+.bottom-nav{position:absolute;left:0;right:0;bottom:0;z-index:20;height:74px;display:flex;align-items:center;justify-content:space-around;border-top:1px solid #e7eef6;background:rgba(255,255,255,.97);backdrop-filter:blur(15px);}
+.nav-item{border:0;background:transparent;color:#7d90aa;min-width:50px;text-align:center;font-size:9px;}
+.nav-icon{display:block;margin-bottom:5px;font-size:20px;}
+.nav-item.active{color:var(--navy);font-weight:800;}
+.page{min-height:100%;background:#f6faff;}
+.page-header{padding:28px 20px 18px;display:flex;align-items:center;gap:14px;color:#fff;background:linear-gradient(135deg,#063b7b,#0867c5);}
+.page-header button{width:38px;height:38px;border:0;border-radius:50%;color:#fff;background:rgba(255,255,255,.11);font-size:24px;}
+.page-header h2{font-size:18px;}
+.content{padding:22px 20px 35px;}
+.steps{display:flex;align-items:center;justify-content:space-between;margin-bottom:28px;}
+.step-wrap{display:flex;flex:1;align-items:center;}
+.step{width:28px;height:28px;flex:0 0 auto;border-radius:50%;background:#e4edf7;color:#8495ac;display:grid;place-items:center;font-size:10px;font-weight:800;}
+.step.active,.step.done{color:#fff;background:var(--navy);}
+.step-line{height:2px;flex:1;background:#d8e4f1;}
+.loan-option{width:100%;display:flex;align-items:center;padding:15px;margin-bottom:10px;border:1px solid #deebf7;border-radius:15px;background:#fff;text-align:left;}
+.loan-option.selected{border:2px solid var(--blue);background:#f5faff;}
+.loan-icon{width:44px;height:44px;flex:0 0 auto;border-radius:12px;background:#eaf4ff;display:grid;place-items:center;margin-right:11px;font-size:19px;}
+.loan-info{min-width:0;flex:1;}
+.loan-info b{font-size:13px;}
+.loan-info p{margin-top:4px;color:var(--muted);font-size:10px;}
+.radio{width:19px;height:19px;border:2px solid #bdd2e7;border-radius:50%;}
+.loan-option.selected .radio{border:6px solid var(--blue);}
+.next-area{display:flex;gap:9px;margin-top:24px;}
+.next-area .btn-light{width:35%;}
+.application-box{padding:18px;border-radius:18px;background:#fff;box-shadow:0 8px 22px rgba(20,73,136,.07);}
+.timeline{margin-top:25px;}
+.timeline-item{display:flex;min-height:84px;}
+.timeline-left{width:37px;flex:0 0 auto;position:relative;}
+.timeline-dot{width:24px;height:24px;position:relative;z-index:2;border:2px solid #b9c9da;border-radius:50%;background:#fff;display:grid;place-items:center;font-size:10px;}
+.timeline-dot.done{border-color:var(--navy);background:var(--navy);color:#fff;}
+.timeline-line{position:absolute;left:11px;top:23px;bottom:-2px;width:2px;background:#cad7e5;}
+.timeline-text b{display:block;font-size:13px;}
+.timeline-text span{display:block;margin-top:5px;color:var(--muted);font-size:10px;}
+.sheet-overlay{position:absolute;inset:0;z-index:100;display:flex;align-items:flex-end;background:rgba(1,17,41,.52);opacity:0;visibility:hidden;transition:.25s;}
+.sheet-overlay.show{opacity:1;visibility:visible;}
+.bottom-sheet{width:100%;max-height:78%;overflow:auto;padding:9px 21px 28px;border-radius:28px 28px 0 0;background:#fff;transform:translateY(100%);transition:.28s ease;scrollbar-width:none;}
+.bottom-sheet::-webkit-scrollbar{display:none;}
+.sheet-overlay.show .bottom-sheet{transform:translateY(0);}
+.sheet-handle{width:42px;height:4px;margin:3px auto 19px;border-radius:10px;background:#d5dce5;}
+.sheet-title-row{display:flex;align-items:center;gap:12px;}
+.sheet-icon{width:50px;height:50px;flex:0 0 auto;display:grid;place-items:center;border-radius:15px;color:#fff;font-size:23px;background:linear-gradient(135deg,var(--navy),var(--blue));}
+.sheet-title-row h2{font-size:20px;color:var(--navy-deep);}
+.sheet-title-row p{margin-top:4px;color:var(--muted);font-size:10px;}
+.detail-group{margin-top:20px;}
+.detail-label{display:flex;align-items:center;gap:7px;margin-bottom:7px;color:var(--navy);font-size:11px;font-weight:800;}
+.detail-text{padding:12px 13px;border-radius:12px;background:#f4f8fd;color:#506781;font-size:11px;line-height:1.55;}
+.doc-list{display:grid;gap:7px;}
+.doc-item{display:flex;align-items:center;gap:8px;padding:10px 12px;border:1px solid #e5edf6;border-radius:11px;color:#506781;font-size:10px;}
+.doc-check{width:19px;height:19px;flex:0 0 auto;display:grid;place-items:center;border-radius:50%;color:var(--navy);background:#e8f3ff;font-size:9px;font-weight:900;}
+.policy-note{margin-top:15px;padding:11px 12px;border-radius:11px;background:#fff8e8;color:#82641c;font-size:9px;line-height:1.5;}
+.toast{position:absolute;left:50%;bottom:90px;z-index:200;max-width:85%;transform:translateX(-50%) translateY(15px);opacity:0;pointer-events:none;padding:11px 17px;border-radius:30px;color:#fff;background:#072b63;font-size:11px;text-align:center;transition:.23s;}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0);}
+@media(max-width:430px){
+  body{background:#fff;}
+  .phone{width:100vw;height:100vh;max-height:none;border-radius:0;box-shadow:none;}
+}
+</style>
+</head>
+<body>
+<div class="phone">
+
+<section id="splash" class="screen active">
+  <div class="splash-inner">
+    <div class="logo">
+      <svg viewBox="0 0 200 150" aria-hidden="true">
+        <defs>
+          <linearGradient id="logoGradient1" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0" stop-color="#062b63"/>
+            <stop offset="1" stop-color="#2898f7"/>
+          </linearGradient>
+        </defs>
+        <path d="M22 47 C58 13 92 30 103 62 C116 96 116 127 100 138 C83 127 83 95 97 62 C110 31 145 13 180 47" fill="none" stroke="url(#logoGradient1)" stroke-width="9" stroke-linecap="round"/>
+      </svg>
+      <div class="logo-name"><span class="tila">TILA</span> <span class="saaco">SAACO</span></div>
+      <div class="tagline">የስኬትዎ አጋር</div>
+    </div>
+    <div class="splash-copy">ሰዎች<br>ዕድል<br>ብልፅግና</div>
+    <div class="splash-bottom"><div class="splash-line"></div>ለተሻለ ነገ አብረን እንገንባ</div>
+  </div>
+</section>
+
+<section id="login" class="screen">
+  <div class="login-wrap">
+    <div class="login-hero">
+      <div class="flow-lines">
+        <svg viewBox="0 0 390 312" preserveAspectRatio="none" aria-hidden="true">
+          <path d="M-20 238 C56 182 96 202 142 168 C194 128 232 84 314 93 C355 97 384 106 420 89" fill="none" stroke="rgba(255,255,255,.22)" stroke-width="2.4" stroke-linecap="round"/>
+          <path d="M-10 268 C42 242 91 258 157 211 C214 171 252 154 314 160 C354 164 376 172 412 150" fill="none" stroke="rgba(255,255,255,.15)" stroke-width="1.7" stroke-linecap="round"/>
+          <circle cx="150" cy="168" r="4.5" fill="rgba(255,255,255,.45)"/>
+          <circle cx="314" cy="93" r="4" fill="rgba(255,255,255,.35)"/>
+        </svg>
+      </div>
+
+      <div class="hero-brand">
+        <div></div>
+        <div class="security-chip">SECURE ACCESS</div>
+      </div>
+
+      <div class="login-brand-center">
+        <div class="logo">
+          <svg viewBox="0 0 200 150" aria-hidden="true">
+            <path d="M22 47 C58 13 92 30 103 62 C116 96 116 127 100 138 C83 127 83 95 97 62 C110 31 145 13 180 47" fill="none" stroke="#ffffff" stroke-width="9" stroke-linecap="round"/>
+          </svg>
+          <div class="logo-name"><span class="tila">TILA</span> <span class="saaco">SAACO</span></div>
+          <div class="tagline">የስኬትዎ አጋር</div>
+        </div>
+      </div>
+
+      <div class="hero-copy">
+        <h1>እንኳን ደህና መጡ</h1>
+        <p>ወደ TILA SAACO መለያዎ በደህና ይግቡ።<br>ቀላል፣ ዘመናዊ እና እምነት የሚሰጥ ልምድ።</p>
+      </div>
+    </div>
+
+    <div class="login-card">
+      <div class="login-card-header">
+        <div>
+          <h2>ግባ</h2>
+          <p>መለያዎን ለማስገባት መረጃዎን ያስገቡ።</p>
+        </div>
+        <div class="mini-badge">TILA</div>
+      </div>
+
+      <div class="field">
+        <label>ስልክ ቁጥር</label>
+        <span class="field-icon">☎</span>
+        <input id="loginPhone" type="tel" placeholder="+251 9XX XXX XXX">
+      </div>
+
+      <div class="field">
+        <label>ፒን</label>
+        <span class="field-icon">●</span>
+        <input id="loginPin" type="password" maxlength="6" placeholder="ፒንዎን ያስገቡ">
+      </div>
+
+      <div class="auth-tools">
+        <span class="small">🔒 ደህንነቱ የተጠበቀ</span>
+        <span class="link small">ፒንዎን ረሱ?</span>
+      </div>
+
+      <button class="btn btn-primary" type="button" onclick="login()">ግባ</button>
+
+      <button class="bio-btn" type="button" onclick="biometricLogin()">
+        <span class="bio-icon">◉</span>
+        <span>በባዮሜትሪክ ይግቡ</span>
+      </button>
+
+      <div class="switch-auth">መለያ የለዎትም? <span class="link" onclick="showScreen('register')">ይመዝገቡ</span></div>
+    </div>
+  </div>
+</section>
+
+<section id="register" class="screen">
+  <div class="auth-page">
+    <div class="logo auth-logo">
+      <svg viewBox="0 0 200 150" aria-hidden="true">
+        <path d="M22 47 C58 13 92 30 103 62 C116 96 116 127 100 138 C83 127 83 95 97 62 C110 31 145 13 180 47" fill="none" stroke="#062b63" stroke-width="9" stroke-linecap="round"/>
+      </svg>
+      <div class="logo-name"><span class="tila">TILA</span> <span class="saaco">SAACO</span></div>
+    </div>
+    <h1 class="title">መለያ ይፍጠሩ</h1>
+    <p class="subtitle">የፋይናንስ ጉዞዎ ከዚህ ይጀምራል</p>
+
+    <div class="form">
+      <div class="field"><label>ሙሉ ስም</label><input id="regName" placeholder="ሙሉ ስምዎን ያስገቡ"></div>
+      <div class="field"><label>ስልክ ቁጥር</label><input id="regPhone" type="tel" placeholder="+251 9XX XXX XXX"></div>
+      <div class="field"><label>ፒን ይፍጠሩ</label><input id="regPin" type="password" maxlength="6" placeholder="6 አሃዝ ፒን ይፍጠሩ"></div>
+      <div class="field"><label>ፒን ያረጋግጡ</label><input id="regConfirm" type="password" maxlength="6" placeholder="ፒን ያረጋግጡ"></div>
+      <button class="btn btn-primary" type="button" onclick="register()">ይመዝገቡ</button>
+      <div class="switch-auth">መለያ አለዎት? <span class="link" onclick="showScreen('login')">ግባ</span></div>
+    </div>
+  </div>
+</section>
+
+<section id="otp" class="screen">
+  <div class="auth-page">
+    <div class="logo auth-logo">
+      <svg viewBox="0 0 200 150" aria-hidden="true">
+        <path d="M22 47 C58 13 92 30 103 62 C116 96 116 127 100 138 C83 127 83 95 97 62 C110 31 145 13 180 47" fill="none" stroke="#062b63" stroke-width="9" stroke-linecap="round"/>
+      </svg>
+    </div>
+    <h1 class="title">ስልክዎን ያረጋግጡ</h1>
+    <p class="subtitle">ወደ ስልክዎ የተላከውን<br>6 አሃዝ ኮድ ያስገቡ።</p>
+    <div class="otp-boxes">
+      <input maxlength="1" inputmode="numeric"><input maxlength="1" inputmode="numeric"><input maxlength="1" inputmode="numeric"><input maxlength="1" inputmode="numeric"><input maxlength="1" inputmode="numeric"><input maxlength="1" inputmode="numeric">
+    </div>
+    <p class="center small" style="margin-bottom:25px;">ኮዱ አልደረሰዎትም? <span class="link">እንደገና ላክ</span></p>
+    <button class="btn btn-primary" type="button" onclick="verifyOTP()">አረጋግጥ</button>
+  </div>
+</section>
+
+<section id="home" class="screen">
+  <div class="home">
+    <div class="home-header">
+      <div class="top-row">
+        <div class="mini-brand">
+          <svg viewBox="0 0 100 80" aria-hidden="true">
+            <path d="M8 24 C28 5 47 17 52 36 C58 58 55 70 49 74 C40 66 41 51 48 35 C57 16 75 7 93 24" fill="none" stroke="#ffffff" stroke-width="5" stroke-linecap="round"/>
+          </svg>
+          TILA SAACO
+        </div>
+        <button class="bell" type="button" onclick="toast('አዲስ ማሳወቂያ የለም')">🔔</button>
+      </div>
+
+      <div class="greeting">
+        <small>እንደምን አደሩ,</small>
+        <h2 id="customerName">Mickeyas</h2>
+        <small>የስኬትዎ አጋር</small>
+      </div>
+    </div>
+
+    <div class="overview">
+      <div class="balance-title">ጠቅላላ ቀሪ ሂሳብ</div>
+      <div class="balance">Br 12,450.00</div>
+      <div class="stats">
+        <div class="stat"><span>ቁጠባ</span><b>Br 8,500</b></div>
+        <div class="stat"><span>የብድር ቀሪ</span><b>Br 3,200</b></div>
+        <div class="stat"><span>ቀጣይ ክፍያ</span><b>Br 650</b></div>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-head"><div><h3>ፈጣን አገልግሎቶች</h3></div></div>
+      <div class="actions">
+        <button class="action" type="button" onclick="startLoan()"><div class="action-icon">💰</div><p>ብድር ይጠይቁ</p></button>
+        <button class="action" type="button" onclick="toast('የክፍያ አገልግሎት ተመርጧል')"><div class="action-icon">💳</div><p>ክፍያ ይፈጽሙ</p></button>
+        <button class="action" type="button" onclick="toast('የቁጠባ አገልግሎት ተመርጧል')"><div class="action-icon">🏦</div><p>ቁጠባ</p></button>
+        <button class="action" type="button" onclick="toast('ግብይቶች ተከፍተዋል')"><div class="action-icon">📄</div><p>ግብይቶች</p></button>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-head">
+        <div><h3>የTILA ብድሮች</h3><p>ለተለያዩ ፍላጎቶች የተዘጋጁ የብድር አማራጮች</p></div>
+        <span class="small"><b id="loanCounter" style="color:var(--navy);">1</b>/12</span>
+      </div>
+      <div class="loan-slider-wrap">
+        <div class="loan-slider" id="loanSlider">
+          <article class="product-card"><div class="product-top"><div class="product-icon">🚀</div><span class="product-number">01</span></div><h4>TILA Start</h4><p>አዲስ አነስተኛ ንግድ ለሚጀምሩ ደንበኞች።</p><div class="product-actions"><button class="product-details-btn" type="button" onclick="showLoanDetails('TILA Start')">ዝርዝር ይመልከቱ</button><button class="product-apply-btn" type="button" onclick="applyLoanProduct('TILA Start')">ያመልክቱ</button></div></article>
+          <article class="product-card"><div class="product-top"><div class="product-icon">📈</div><span class="product-number">02</span></div><h4>TILA Grow</h4><p>ነባር ንግድን ለማስፋፋት የሚረዳ ብድር።</p><div class="product-actions"><button class="product-details-btn" type="button" onclick="showLoanDetails('TILA Grow')">ዝርዝር ይመልከቱ</button><button class="product-apply-btn" type="button" onclick="applyLoanProduct('TILA Grow')">ያመልክቱ</button></div></article>
+          <article class="product-card"><div class="product-top"><div class="product-icon">🛒</div><span class="product-number">03</span></div><h4>TILA Daily</h4><p>ለዕለታዊ የንግድ እንቅስቃሴ የስራ ካፒታል።</p><div class="product-actions"><button class="product-details-btn" type="button" onclick="showLoanDetails('TILA Daily')">ዝርዝር ይመልከቱ</button><button class="product-apply-btn" type="button" onclick="applyLoanProduct('TILA Daily')">ያመልክቱ</button></div></article>
+          <article class="product-card"><div class="product-top"><div class="product-icon">⚙️</div><span class="product-number">04</span></div><h4>TILA Asset</h4><p>ለማሽን፣ መሳሪያና የስራ ንብረት።</p><div class="product-actions"><button class="product-details-btn" type="button" onclick="showLoanDetails('TILA Asset')">ዝርዝር ይመልከቱ</button><button class="product-apply-btn" type="button" onclick="applyLoanProduct('TILA Asset')">ያመልክቱ</button></div></article>
+          <article class="product-card"><div class="product-top"><div class="product-icon">🌱</div><span class="product-number">05</span></div><h4>TILA Farm</h4><p>ለግብርና፣ እንስሳትና የእርሻ ስራዎች።</p><div class="product-actions"><button class="product-details-btn" type="button" onclick="showLoanDetails('TILA Farm')">ዝርዝር ይመልከቱ</button><button class="product-apply-btn" type="button" onclick="applyLoanProduct('TILA Farm')">ያመልክቱ</button></div></article>
+          <article class="product-card"><div class="product-top"><div class="product-icon">🏠</div><span class="product-number">06</span></div><h4>TILA Home</h4><p>ለቤት ጥገናና ማሻሻያ ፍላጎት።</p><div class="product-actions"><button class="product-details-btn" type="button" onclick="showLoanDetails('TILA Home')">ዝርዝር ይመልከቱ</button><button class="product-apply-btn" type="button" onclick="applyLoanProduct('TILA Home')">ያመልክቱ</button></div></article>
+          <article class="product-card"><div class="product-top"><div class="product-icon">🎓</div><span class="product-number">07</span></div><h4>TILA Edu</h4><p>ለትምህርትና ስልጠና ወጪዎች።</p><div class="product-actions"><button class="product-details-btn" type="button" onclick="showLoanDetails('TILA Edu')">ዝርዝር ይመልከቱ</button><button class="product-apply-btn" type="button" onclick="applyLoanProduct('TILA Edu')">ያመልክቱ</button></div></article>
+          <article class="product-card"><div class="product-top"><div class="product-icon">✚</div><span class="product-number">08</span></div><h4>TILA Emergency</h4><p>ለአስቸኳይ የገንዘብ ፍላጎት።</p><div class="product-actions"><button class="product-details-btn" type="button" onclick="showLoanDetails('TILA Emergency')">ዝርዝር ይመልከቱ</button><button class="product-apply-btn" type="button" onclick="applyLoanProduct('TILA Emergency')">ያመልክቱ</button></div></article>
+          <article class="product-card"><div class="product-top"><div class="product-icon">👥</div><span class="product-number">09</span></div><h4>TILA Group</h4><p>በቡድን ለሚያመለክቱ ደንበኞች የተዘጋጀ።</p><div class="product-actions"><button class="product-details-btn" type="button" onclick="showLoanDetails('TILA Group')">ዝርዝር ይመልከቱ</button><button class="product-apply-btn" type="button" onclick="applyLoanProduct('TILA Group')">ያመልክቱ</button></div></article>
+          <article class="product-card"><div class="product-top"><div class="product-icon">↔️</div><span class="product-number">10</span></div><h4>TILA Flex</h4><p>ለግል ወይም ለንግድ ፍላጎት ተለዋዋጭ ብድር።</p><div class="product-actions"><button class="product-details-btn" type="button" onclick="showLoanDetails('TILA Flex')">ዝርዝር ይመልከቱ</button><button class="product-apply-btn" type="button" onclick="applyLoanProduct('TILA Flex')">ያመልክቱ</button></div></article>
+          <article class="product-card"><div class="product-top"><div class="product-icon">☀️</div><span class="product-number">11</span></div><h4>TILA Green</h4><p>ለሶላር፣ ኃይል ቆጣቢና አረንጓዴ ኢንቨስትመንት።</p><div class="product-actions"><button class="product-details-btn" type="button" onclick="showLoanDetails('TILA Green')">ዝርዝር ይመልከቱ</button><button class="product-apply-btn" type="button" onclick="applyLoanProduct('TILA Green')">ያመልክቱ</button></div></article>
+          <article class="product-card"><div class="product-top"><div class="product-icon">⚡</div><span class="product-number">12</span></div><h4>TILA Advance</h4><p>ለነባር ብቁ ደንበኞች አጭር ጊዜ ድጋፍ።</p><div class="product-actions"><button class="product-details-btn" type="button" onclick="showLoanDetails('TILA Advance')">ዝርዝር ይመልከቱ</button><button class="product-apply-btn" type="button" onclick="applyLoanProduct('TILA Advance')">ያመልክቱ</button></div></article>
+        </div>
+        <div class="slider-controls">
+          <div class="slider-dots" id="sliderDots"></div>
+          <div class="slider-arrows"><button class="slider-arrow" type="button" onclick="moveSlider(-1)">‹</button><button class="slider-arrow" type="button" onclick="moveSlider(1)">›</button></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-head"><div><h3>ያለኝ ብድር</h3></div><span class="link small" onclick="showScreen('statusPage')">ዝርዝር ይመልከቱ</span></div>
+      <div class="loan-card">
+        <div class="loan-card-row">
+          <div><h4>Business Loan</h4><p>ቀሪ ሂሳብ: Br 3,200</p></div>
+          <span class="status">ንቁ</span>
+        </div>
+        <div class="progress-line"><div class="progress-value"></div></div>
+        <div class="progress-meta"><span>የክፍያ ሂደት</span><span>45%</span></div>
+      </div>
+    </div>
+  </div>
+
+  <nav class="bottom-nav">
+    <button class="nav-item active" type="button"><span class="nav-icon">⌂</span>መነሻ</button>
+    <button class="nav-item" type="button" onclick="startLoan()"><span class="nav-icon">▣</span>ብድሮች</button>
+    <button class="nav-item" type="button" onclick="toast('ቁጠባ ተከፍቷል')"><span class="nav-icon">◉</span>ቁጠባ</button>
+    <button class="nav-item" type="button" onclick="toast('ታሪክ ተከፍቷል')"><span class="nav-icon">▤</span>ታሪክ</button>
+    <button class="nav-item" type="button" onclick="toast('ፕሮፋይል ተከፍቷል')"><span class="nav-icon">♙</span>ፕሮፋይል</button>
+  </nav>
+</section>
+
+<section id="loanPage" class="screen">
+  <div class="page">
+    <div class="page-header"><button type="button" onclick="showScreen('home')">‹</button><h2>ብድር ይጠይቁ</h2></div>
+    <div class="content">
+      <div class="steps">
+        <div class="step-wrap"><div id="step1" class="step active">1</div><div class="step-line"></div></div>
+        <div class="step-wrap"><div id="step2" class="step">2</div><div class="step-line"></div></div>
+        <div class="step-wrap"><div id="step3" class="step">3</div><div class="step-line"></div></div>
+        <div id="step4" class="step">4</div>
+      </div>
+
+      <div id="loanStep1" class="loan-step">
+        <h2 style="font-size:20px;">የብድር አይነት ይምረጡ</h2>
+        <p class="small" style="margin:7px 0 20px;">ለፍላጎትዎ የሚመጥነውን የብድር አይነት ይምረጡ።</p>
+        <div id="loanOptions"></div>
+        <div class="next-area"><button class="btn btn-primary" type="button" onclick="loanNext(2)">ቀጣይ</button></div>
+      </div>
+
+      <div id="loanStep2" class="loan-step" style="display:none;">
+        <h2 style="font-size:20px;">የብድር ዝርዝር</h2>
+        <p class="small" style="margin:7px 0 22px;">ለማመልከቻዎ የሚፈለገውን መረጃ ያስገቡ።</p>
+        <div class="field"><label>የሚፈልጉት መጠን (ብር)</label><input id="loanAmount" type="number" min="1" placeholder="መጠኑን ያስገቡ"></div>
+        <div class="field"><label>የክፍያ ጊዜ</label>
+          <select id="loanPeriod">
+            <option value="">የክፍያ ጊዜ ይምረጡ</option>
+            <option>3 ወር</option><option>6 ወር</option><option>12 ወር</option><option>18 ወር</option><option>24 ወር</option>
+          </select>
+        </div>
+        <div class="field"><label>የብድሩ ዓላማ</label><textarea id="loanPurpose" placeholder="ብድሩን ለምን እንደሚጠቀሙ በአጭሩ ይግለጹ"></textarea></div>
+        <div class="next-area"><button class="btn btn-light" type="button" onclick="loanNext(1)">ተመለስ</button><button class="btn btn-primary" type="button" onclick="loanNext(3)">ቀጣይ</button></div>
+      </div>
+
+      <div id="loanStep3" class="loan-step" style="display:none;">
+        <h2 style="font-size:20px;">ሰነዶች</h2>
+        <p class="small" style="margin:7px 0 22px;">የሚፈለጉ ሰነዶች በመረጡት የብድር አይነት ይወሰናሉ።</p>
+        <div id="applicationDocuments"></div>
+        <div class="policy-note">የመጨረሻ የሰነድ መስፈርቶች፣ ብቁነት፣ የብድር መጠን፣ ዋጋ/ክፍያ እና የመመለሻ ውሎች በTILA SAACO ፖሊሲ እና ፍቃድ ይወሰናሉ።</div>
+        <div class="next-area"><button class="btn btn-light" type="button" onclick="loanNext(2)">ተመለስ</button><button class="btn btn-primary" type="button" onclick="loanNext(4)">ቀጣይ</button></div>
+      </div>
+
+      <div id="loanStep4" class="loan-step" style="display:none;">
+        <h2 style="font-size:20px;">ይገምግሙ እና ያስገቡ</h2>
+        <p class="small" style="margin:7px 0 22px;">ከማስገባትዎ በፊት ማመልከቻዎን ይመልከቱ።</p>
+        <div class="application-box">
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:15px;font-size:12px;">
+            <span class="small">የብድር አይነት</span><b id="reviewType">-</b>
+            <span class="small">የተጠየቀ መጠን</span><b id="reviewAmount">-</b>
+            <span class="small">የክፍያ ጊዜ</span><b id="reviewPeriod">-</b>
+            <span class="small">ዓላማ</span><b id="reviewPurpose">-</b>
+          </div>
+        </div>
+        <div class="next-area"><button class="btn btn-light" type="button" onclick="loanNext(3)">ተመለስ</button><button class="btn btn-primary" type="button" onclick="submitLoan()">ማመልከቻ አስገባ</button></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="statusPage" class="screen">
+  <div class="page">
+    <div class="page-header"><button type="button" onclick="showScreen('home')">‹</button><h2>የብድር ማመልከቻ</h2></div>
+    <div class="content">
+      <div class="application-box">
+        <span class="status">በግምገማ ላይ</span>
+        <h3 id="statusLoanName" style="margin-top:13px;">TILA Grow</h3>
+        <div class="balance" id="statusLoanAmount" style="font-size:24px;">ማመልከቻው ገብቷል</div>
+        <p class="small" style="margin-top:5px;">TILA SAACO Microfinance</p>
+      </div>
+
+      <div class="timeline">
+        <div class="timeline-item"><div class="timeline-left"><div class="timeline-dot done">✓</div><div class="timeline-line"></div></div><div class="timeline-text"><b>ማመልከቻ ገብቷል</b><span>ማመልከቻዎ በትክክል ደርሶናል።</span></div></div>
+        <div class="timeline-item"><div class="timeline-left"><div class="timeline-dot done">✓</div><div class="timeline-line"></div></div><div class="timeline-text"><b>በግምገማ ላይ</b><span>ማመልከቻዎና ሰነዶችዎ በመገምገም ላይ ናቸው።</span></div></div>
+        <div class="timeline-item"><div class="timeline-left"><div class="timeline-dot"></div><div class="timeline-line"></div></div><div class="timeline-text"><b>ውሳኔ</b><span>ግምገማው እስኪጠናቀቅ በመጠበቅ ላይ።</span></div></div>
+        <div class="timeline-item"><div class="timeline-left"><div class="timeline-dot"></div></div><div class="timeline-text"><b>የብድር መልቀቅ</b><span>ከፍቃድና ከሚፈለገው ሂደት በኋላ ይፈፀማል።</span></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div id="loanSheetOverlay" class="sheet-overlay" onclick="sheetBackgroundClick(event)">
+  <div class="bottom-sheet">
+    <div class="sheet-handle"></div>
+    <div class="sheet-title-row">
+      <div class="sheet-icon" id="sheetIcon">🚀</div>
+      <div><h2 id="sheetTitle">TILA Start</h2><p>TILA SAACO የብድር አገልግሎት</p></div>
+    </div>
+    <div class="detail-group"><div class="detail-label">◎ ዓላማ</div><div class="detail-text" id="sheetPurpose"></div></div>
+    <div class="detail-group"><div class="detail-label">♙ ለማን የሚሆን</div><div class="detail-text" id="sheetEligibility"></div></div>
+    <div class="detail-group"><div class="detail-label">✓ የሚፈለጉ ሰነዶች</div><div class="doc-list" id="sheetDocuments"></div></div>
+    <div class="policy-note">የብድር መጠን፣ የአገልግሎት ክፍያ፣ ወለድ/ዋጋ፣ የክፍያ ጊዜ፣ ዋስትና፣ መያዣ እና የመጨረሻ ፍቃድ በTILA SAACO የተፈቀደ የብድር ፖሊሲ መሰረት ይወሰናል።</div>
+    <button class="btn btn-primary" type="button" style="margin-top:18px;" onclick="applyFromSheet()">ለዚህ ብድር ያመልክቱ</button>
+    <button class="btn btn-light" type="button" style="margin-top:9px;" onclick="closeLoanSheet()">ዝጋ</button>
+  </div>
+</div>
+
+<div id="toast" class="toast"></div>
+</div>
+
+<script>
+const loanProducts=[
+{name:"TILA Start",icon:"🚀",short:"አዲስ ንግድ ለመጀመር",purpose:"አዲስ ማይክሮ ወይም አነስተኛ ንግድ ለመጀመር ለሚፈልጉ ብቁ ደንበኞች የተዘጋጀ የብድር አገልግሎት ነው።",eligibility:"አዋጭ የንግድ ሀሳብ ያላቸው እና በTILA SAACO የሚፈለጉ መረጃዎችና ሰነዶችን ማቅረብ የሚችሉ ደንበኞች።",docs:["ትክክለኛ መታወቂያ","አጭር የንግድ እቅድ ወይም መግለጫ","አድራሻና የመገናኛ መረጃ","ተጨማሪ የግምገማ ሰነዶች"]},
+{name:"TILA Grow",icon:"📈",short:"ነባር ንግድን ለማስፋፋት",purpose:"ንግዳቸውን ለማሳደግ፣ ስቶክ ለመጨመር ወይም አቅም ለማሻሻል የሚፈልጉ ነባር ንግዶችን ይደግፋል።",eligibility:"ቀጣይ የንግድ እንቅስቃሴ ማሳየት የሚችሉ እና የTILA SAACO የብድር መስፈርቶችን የሚያሟሉ የንግድ ባለቤቶች።",docs:["ትክክለኛ መታወቂያ","የንግድ መረጃ ወይም ፈቃድ ካለ","የገቢ ወይም የንግድ እንቅስቃሴ ማረጋገጫ","ተጨማሪ የግምገማ ሰነዶች"]},
+{name:"TILA Daily",icon:"🛒",short:"ለዕለታዊ ስራ ካፒታል",purpose:"ንግዶች የዕለት ተዕለት የስራ ወጪዎችን እና ስቶክ ፍላጎቶችን ለማሟላት የሚረዳ የስራ ካፒታል ብድር ነው።",eligibility:"መደበኛ የንግድ እንቅስቃሴ ያላቸው ነጋዴዎች ወይም አነስተኛ ንግዶች።",docs:["ትክክለኛ መታወቂያ","የንግድ እንቅስቃሴ መረጃ","አድራሻና የመገናኛ መረጃ","የሽያጭ ወይም የፋይናንስ ማረጋገጫ ካስፈለገ"]},
+{name:"TILA Asset",icon:"⚙️",short:"የስራ ንብረት ለመግዛት",purpose:"የገቢ ማምጫ የሆኑ መሳሪያዎች፣ ማሽኖች ወይም ሌሎች የስራ ንብረቶችን ለመግዛት የተዘጋጀ ብድር ነው።",eligibility:"ለገቢ ማምጫ አገልግሎት የሚውሉ ንብረቶችን ለመግዛት የሚፈልጉ የንግድ ባለቤቶች ወይም በራሳቸው የሚሰሩ ግለሰቦች።",docs:["ትክክለኛ መታወቂያ","የንግድ መረጃ","የንብረቱ ዋጋ ወይም quotation","ተጨማሪ ሰነዶች እንደ ግምገማ"]},
+{name:"TILA Farm",icon:"🌱",short:"ለግብርናና እንስሳት",purpose:"ለእርሻ፣ ለእንስሳት እና ለግብርና ግብዓቶች የሚያገለግል የብድር አማራጭ ነው።",eligibility:"አርሶ አደሮች፣ የእንስሳት አርቢዎች እና ግብርና ጋር የተያያዙ ብቁ ደንበኞች።",docs:["ትክክለኛ መታወቂያ","የግብርና ስራ መረጃ","የመሬት ወይም የስራ ማረጋገጫ ካለ","ተጨማሪ የግምገማ ሰነዶች"]},
+{name:"TILA Home",icon:"🏠",short:"ለቤት ማሻሻያ",purpose:"ለቤት ጥገና፣ ማሻሻያ ወይም ሌሎች ተፈቃድ የቤት ፍላጎቶች የተዘጋጀ የብድር ሀሳብ ነው።",eligibility:"የብድር ግምገማውን የሚያሟሉ እና እውነተኛ ፍላጎት ማሳየት የሚችሉ ብቁ ደንበኞች።",docs:["ትክክለኛ መታወቂያ","የአድራሻ መረጃ","የወጪ ግምት ወይም ዓላማ መግለጫ","ተጨማሪ ሰነዶች እንደ ግምገማ"]},
+{name:"TILA Edu",icon:"🎓",short:"ለትምህርትና ስልጠና",purpose:"ለትምህርት፣ ለሙያ ስልጠና እና ለተፈቀዱ የትምህርት ወጪዎች ድጋፍ የሚሰጥ ብድር ነው።",eligibility:"ተማሪዎች፣ ወላጆች ወይም በትምህርት ወጪ ላይ የሚያመለክቱ ብቁ ደንበኞች።",docs:["ትክክለኛ መታወቂያ","የትምህርት ወይም የስልጠና ማረጋገጫ","የክፍያ መረጃ ካለ","ተጨማሪ የግምገማ ሰነዶች"]},
+{name:"TILA Emergency",icon:"✚",short:"ለአስቸኳይ ፍላጎት",purpose:"አስቸኳይ እና ተፈቃድ የገንዘብ ፍላጎት ላላቸው ብቁ ደንበኞች የተዘጋጀ ብድር ነው።",eligibility:"የአስቸኳይ ብድር መስፈርቶችን የሚያሟሉ አዲስ ወይም ነባር ብቁ ደንበኞች።",docs:["ትክክለኛ መታወቂያ","የፍላጎቱ ማረጋገጫ ካስፈለገ","የገቢ ወይም የክፍያ አቅም መረጃ","ተጨማሪ ሰነዶች እንደ ግምገማ"]},
+{name:"TILA Group",icon:"👥",short:"የቡድን ማይክሮፋይናንስ",purpose:"በቡድን ወይም solidarity lending ስር ለሚያመለክቱ ብቁ ደንበኞች የተዘጋጀ የብድር አማራጭ ነው።",eligibility:"የቡድን ብድር መስፈርቶችን፣ መታወቂያን እና የግምገማ መስፈርቶችን የሚያሟሉ ቡድኖች።",docs:["የቡድን አባላት መታወቂያ","የቡድን መረጃ","የቡድን ስምምነት ወይም አግባብ ያለው ሰነድ","የንግድ ወይም የገቢ መረጃ ካስፈለገ"]},
+{name:"TILA Flex",icon:"↔️",short:"ተለዋዋጭ የብድር አማራጭ",purpose:"ለግል ወይም ለንግድ ፍላጎት በተለዋዋጭ ሁኔታ የሚቀርብ እና በTILA SAACO ፖሊሲ ላይ የተመሰረተ ብድር ነው።",eligibility:"የፋይናንስ ፍላጎታቸው እና የክፍያ አቅማቸው ከTILA Flex መስፈርት ጋር የሚስማማ ብቁ አመልካቾች።",docs:["ትክክለኛ መታወቂያ","የገቢ ወይም የንግድ መረጃ","የዓላማ መረጃ","ተጨማሪ የግምገማ ሰነዶች"]},
+{name:"TILA Green",icon:"☀️",short:"አረንጓዴና ኃይል ኢንቨስትመንት",purpose:"ለሶላር ስርዓት፣ ለኃይል ቆጣቢ መሳሪያዎች እና ለአካባቢን የሚጠቅሙ ኢንቨስትመንቶች የተዘጋጀ ብድር ነው።",eligibility:"አረንጓዴ ኢንቨስትመንት የሚፈልጉ እና አግባብ ያለውን የብድር መስፈርት የሚያሟሉ ግለሰቦች ወይም ንግዶች።",docs:["ትክክለኛ መታወቂያ","የመሳሪያ ወይም የፕሮጀክት quotation","የዓላማ እና የአቅራቢ መረጃ","ተጨማሪ የግምገማ ሰነዶች"]},
+{name:"TILA Advance",icon:"⚡",short:"ለነባር ደንበኞች አጭር ጊዜ ድጋፍ",purpose:"ጥሩ የመለያ ታሪክ ላላቸው ነባር ደንበኞች ለአጭር ጊዜ ፍላጎት የተዘጋጀ የብድር አማራጭ ነው።",eligibility:"በውስጣዊ መስፈርቶች፣ በየክፍያ ታሪክ እና በመለያ አቋም ብቁ የሆኑ ነባር ደንበኞች።",docs:["ትክክለኛ መታወቂያ","የነባር ደንበኛ መለያ መረጃ","የዓላማ ማረጋገጫ","ተጨማሪ ሰነዶች ካስፈለገ"]}
+];
+let selectedLoan="TILA Start";
+let sheetLoan="TILA Start";
+let sliderIndex=0;
+let sliderTimer;
+let sliderAutoplayTimer;
+setTimeout(()=>{showScreen("login");},2200);
+renderLoanOptions();
+renderSliderDots();
+renderApplicationDocuments();
+startSliderAutoplay();
+
+function showScreen(id){
+  document.querySelectorAll(".screen").forEach(screen=>screen.classList.remove("active"));
+  const target=document.getElementById(id);
+  if(target){target.classList.add("active");target.scrollTop=0;}
+}
+function login(){
+  const phone=document.getElementById("loginPhone").value.trim();
+  const pin=document.getElementById("loginPin").value.trim();
+  if(!phone||!pin){toast("ስልክ ቁጥርና ፒን ያስገቡ");return;}
+  showScreen("home");
+}
+function biometricLogin(){toast("የባዮሜትሪክ ማረጋገጫ ተሳክቷል");setTimeout(()=>showScreen("home"),650);}
+function register(){
+  const name=document.getElementById("regName").value.trim();
+  const phone=document.getElementById("regPhone").value.trim();
+  const pin=document.getElementById("regPin").value.trim();
+  const confirm=document.getElementById("regConfirm").value.trim();
+  if(!name||!phone||!pin||!confirm){toast("እባክዎ ሁሉንም መረጃ ያስገቡ");return;}
+  if(pin.length<4){toast("ትክክለኛ ፒን ይፍጠሩ");return;}
+  if(pin!==confirm){toast("ፒኖቹ አይመሳሰሉም");return;}
+  document.getElementById("customerName").textContent=name.split(/\s+/)[0];
+  showScreen("otp");
+}
+const otpInputs=document.querySelectorAll(".otp-boxes input");
+otpInputs.forEach((input,index)=>{
+  input.addEventListener("input",()=>{input.value=input.value.replace(/\D/g,"").slice(0,1);if(input.value&&index<otpInputs.length-1){otpInputs[index+1].focus();}});
+  input.addEventListener("keydown",(event)=>{if(event.key==="Backspace"&&!input.value&&index>0){otpInputs[index-1].focus();}});
+});
+function verifyOTP(){
+  let code="";
+  otpInputs.forEach(input=>code+=input.value);
+  if(code.length!==6){toast("6 አሃዝ ኮዱን ያስገቡ");return;}
+  showScreen("home");
+}
+const slider=document.getElementById("loanSlider");
+function renderSliderDots(){
+  const dots=document.getElementById("sliderDots");
+  dots.innerHTML="";
+  loanProducts.forEach((_,index)=>{const dot=document.createElement("span");dot.className="slider-dot"+(index===sliderIndex?" active":"");dots.appendChild(dot);});
+  document.getElementById("loanCounter").textContent=sliderIndex+1;
+}
+function startSliderAutoplay(){clearInterval(sliderAutoplayTimer);sliderAutoplayTimer=setInterval(()=>{moveSlider(1,true);},3300);}
+function restartSliderAutoplay(){clearInterval(sliderAutoplayTimer);startSliderAutoplay();}
+function moveSlider(direction,fromAuto=false){
+  const cards=slider.querySelectorAll(".product-card");
+  sliderIndex=(sliderIndex+direction+cards.length)%cards.length;
+  cards[sliderIndex].scrollIntoView({behavior:"smooth",inline:"start",block:"nearest"});
+  renderSliderDots();
+  if(!fromAuto){restartSliderAutoplay();}
+}
+["touchstart","pointerdown","wheel","mousedown"].forEach(eventName=>{slider.addEventListener(eventName,()=>{clearInterval(sliderAutoplayTimer);},{passive:true});});
+["touchend","pointerup","mouseup"].forEach(eventName=>{slider.addEventListener(eventName,()=>{setTimeout(restartSliderAutoplay,900);},{passive:true});});
+slider.addEventListener("scroll",()=>{clearTimeout(sliderTimer);sliderTimer=setTimeout(()=>{const cards=[...slider.querySelectorAll(".product-card")];let nearestIndex=0;let nearestDistance=Infinity;cards.forEach((card,index)=>{const distance=Math.abs(card.offsetLeft-slider.scrollLeft);if(distance<nearestDistance){nearestDistance=distance;nearestIndex=index;}});sliderIndex=nearestIndex;renderSliderDots();},80);});
+function getLoanProduct(name){return loanProducts.find(item=>item.name===name);}
+function showLoanDetails(name){
+  const loan=getLoanProduct(name);
+  if(!loan)return;
+  sheetLoan=loan.name;
+  document.getElementById("sheetIcon").textContent=loan.icon;
+  document.getElementById("sheetTitle").textContent=loan.name;
+  document.getElementById("sheetPurpose").textContent=loan.purpose;
+  document.getElementById("sheetEligibility").textContent=loan.eligibility;
+  const documents=document.getElementById("sheetDocuments");
+  documents.innerHTML="";
+  loan.docs.forEach(doc=>{const item=document.createElement("div");item.className="doc-item";item.innerHTML=`<span class="doc-check">✓</span><span>${escapeHTML(doc)}</span>`;documents.appendChild(item);});
+  document.getElementById("loanSheetOverlay").classList.add("show");
+}
+function closeLoanSheet(){document.getElementById("loanSheetOverlay").classList.remove("show");}
+function sheetBackgroundClick(event){if(event.target.id==="loanSheetOverlay"){closeLoanSheet();}}
+function applyFromSheet(){closeLoanSheet();applyLoanProduct(sheetLoan);}
+function applyLoanProduct(name){selectedLoan=name;renderLoanOptions();loanNext(1);showScreen("loanPage");}
+function startLoan(){loanNext(1);showScreen("loanPage");}
+function renderLoanOptions(){
+  const container=document.getElementById("loanOptions");
+  if(!container)return;
+  container.innerHTML="";
+  loanProducts.forEach(loan=>{
+    const selected=loan.name===selectedLoan;
+    const button=document.createElement("button");
+    button.type="button";
+    button.className="loan-option"+(selected?" selected":"");
+    button.innerHTML=`<div class="loan-icon">${loan.icon}</div><div class="loan-info"><b>${escapeHTML(loan.name)}</b><p>${escapeHTML(loan.short)}</p></div><div class="radio"></div>`;
+    button.addEventListener("click",()=>{selectedLoan=loan.name;renderLoanOptions();renderApplicationDocuments();});
+    container.appendChild(button);
+  });
+}
+function renderApplicationDocuments(){
+  const container=document.getElementById("applicationDocuments");
+  if(!container)return;
+  const loan=getLoanProduct(selectedLoan);
+  if(!loan)return;
+  container.innerHTML="";
+  loan.docs.forEach((doc,index)=>{
+    const card=document.createElement("div");
+    card.className="loan-card";
+    card.innerHTML=`<div class="loan-card-row"><div><h4>${escapeHTML(doc)}</h4><p>${index===0?"ዋና የመታወቂያ ሰነድ":"እንደ ግምገማ ሊፈለግ ይችላል"}</p></div><button class="btn btn-light" type="button" style="width:auto;padding:9px 13px;" onclick="toast('ሰነድ ለመጫን ተመርጧል')">ጫን</button></div>`;
+    container.appendChild(card);
+  });
+}
+function loanNext(step){
+  if(step===3){
+    const amount=Number(document.getElementById("loanAmount").value);
+    const period=document.getElementById("loanPeriod").value;
+    if(!Number.isFinite(amount)||amount<=0){toast("ትክክለኛ የብድር መጠን ያስገቡ");return;}
+    if(!period){toast("የክፍያ ጊዜ ይምረጡ");return;}
+  }
+  document.querySelectorAll(".loan-step").forEach(el=>el.style.display="none");
+  const current=document.getElementById("loanStep"+step);
+  if(current)current.style.display="block";
+  for(let i=1;i<=4;i++){
+    const circle=document.getElementById("step"+i);
+    circle.className="step";
+    if(i<step)circle.classList.add("done");
+    if(i===step)circle.classList.add("active");
+  }
+  if(step===3){renderApplicationDocuments();}
+  if(step===4){
+    const amount=Number(document.getElementById("loanAmount").value||0);
+    const period=document.getElementById("loanPeriod").value;
+    const purpose=document.getElementById("loanPurpose").value.trim();
+    document.getElementById("reviewType").textContent=selectedLoan;
+    document.getElementById("reviewAmount").textContent=amount>0?"Br "+amount.toLocaleString():"-";
+    document.getElementById("reviewPeriod").textContent=period||"-";
+    document.getElementById("reviewPurpose").textContent=purpose||"አልተገለጸም";
+  }
+  const page=document.getElementById("loanPage");
+  if(page)page.scrollTop=0;
+}
+function submitLoan(){
+  const amount=Number(document.getElementById("loanAmount").value||0);
+  document.getElementById("statusLoanName").textContent=selectedLoan;
+  document.getElementById("statusLoanAmount").textContent=amount>0?"Br "+amount.toLocaleString():"ማመልከቻው ገብቷል";
+  toast("ማመልከቻዎ በትክክል ገብቷል");
+  setTimeout(()=>{showScreen("statusPage");},700);
+}
+function toast(message){
+  const element=document.getElementById("toast");
+  element.textContent=message;
+  element.classList.add("show");
+  clearTimeout(window.__toastTimer);
+  window.__toastTimer=setTimeout(()=>{element.classList.remove("show");},2200);
+}
+function escapeHTML(value){
+  return String(value).replaceAll("&","&amp;").replaceAll("<","&lt;").replaceAll(">","&gt;").replaceAll('"',"&quot;").replaceAll("'","&#039;");
+}
+</script>
+</body>
+</html>
